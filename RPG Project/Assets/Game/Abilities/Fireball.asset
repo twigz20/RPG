@@ -7,23 +7,22 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 0}
-  m_Enabled: 1
+  m_Enabled: 0
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: f2591c982fc81e940845bedeabeb30af, type: 3}
+  m_Script: {fileID: 11500000, guid: 81f4e114f4135914f8a29882467c721d, type: 3}
   m_Name: Fireball
   m_EditorClassIdentifier: 
-  itemID: f51df4f0-78c3-429a-a632-a364e179cf29
-  displayName: 
-  description: 
+  itemID: d0267eb0-9a58-4b2c-aea7-25bc89992d06
+  displayName: Fireball
+  description: Burn the world.
   icon: {fileID: 21300000, guid: c289b67aac6646a46ba5acdcdfbf2ecf, type: 3}
   pickup: {fileID: 2345540406424134230, guid: bc751394949388f4b9270cb19b495c63, type: 3}
   stackable: 0
-  allowedEquipLocation: 5
-  animatorOverride: {fileID: 0}
-  equippedPrefab: {fileID: 0}
-  weaponDamage: 5
-  percentageBonus: 25
-  weaponRange: 18
-  isRightHanded: 0
+  consumable: 0
+  animatorOverride: {fileID: 22100000, guid: 7001e19deb051d54987bdace254e323c, type: 2}
   projectile: {fileID: 4363093564197430368, guid: fcff971cc6939004ca7e345f8d0db844,
     type: 3}
+  damage: 15
+  percentageBonus: 0
+  range: 20
+  isRightHanded: 0
