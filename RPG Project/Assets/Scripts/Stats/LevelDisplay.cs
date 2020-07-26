@@ -7,6 +7,7 @@ namespace RPG.Stats
     public class LevelDisplay : MonoBehaviour
     {
         BaseStats baseStats;
+        [SerializeField] Text text;
 
         private void Awake()
         {
@@ -15,7 +16,7 @@ namespace RPG.Stats
 
         private void Update()
         {
-            GetComponent<Text>().text = String.Format("{0:0}", baseStats.GetLevel());
+            text.text = String.Format("{0:0}", baseStats.GetLevel());
         }
     }
 }

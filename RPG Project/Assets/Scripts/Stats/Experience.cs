@@ -21,6 +21,11 @@ namespace RPG.Stats
             return experiencePoints;
         }
 
+        public float GetLevelMaxPoints()
+        {
+            return experiencePoints;
+        }
+
         public object CaptureState()
         {
             return experiencePoints;
