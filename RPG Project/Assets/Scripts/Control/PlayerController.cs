@@ -29,6 +29,7 @@ namespace RPG.Control
 
         private void Awake() {
             health = GetComponent<Health>();
+            print(Mathf.Infinity);
         }
 
         private void Update()

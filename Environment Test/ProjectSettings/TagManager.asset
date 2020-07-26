@@ -3,11 +3,7 @@
 --- !u!78 &1
 TagManager:
   serializedVersion: 2
-  tags:
-  - EnemyInfo
-  - Ability
-  - ActionSlotInventory
-  - ActionSlot
+  tags: []
   layers:
   - Default
   - TransparentFX

@@ -9,22 +9,15 @@ using UnityEngine;
 namespace RPG.Combat
 {
     [CreateAssetMenu(fileName = "Abilities", menuName = ("Abilities/New Ability"))]
-    public class AbilityConfig : ActionItem
+    public class AbilityConfig : ActionItem, IModifierProvider
     {
         [SerializeField] AnimatorOverrideController animatorOverride = null;
         [SerializeField] Projectile projectile;
         [SerializeField] float damage = 5f;
         [SerializeField] float percentageBonus = 0;
         [SerializeField] float range = 2f;
+        [SerializeField] public float cooldown = 5f;
         [SerializeField] bool isRightHanded = true;
-
-        private void Awake()
-        {
-            if (projectile == null)
-            {
-                throw new Exception("Projectile not assigned.");
-            }
-        }
 
         private void SetAnimator(Animator animator)
         {
@@ -50,7 +43,7 @@ namespace RPG.Combat
         public void UseAbility(Transform rightHand, Transform leftHand, Health target, GameObject instigator, float calculatedDamage)
         {
             Projectile projectileInstance = Instantiate(projectile, GetTransform(rightHand, leftHand).position, Quaternion.identity);
-            projectileInstance.SetTarget(target, instigator, calculatedDamage + damage);
+            projectileInstance.SetTarget(target, instigator, calculatedDamage);
         }
 
         public float GetDamage()

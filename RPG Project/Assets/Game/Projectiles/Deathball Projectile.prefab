@@ -4767,8 +4767,8 @@ ParticleSystemRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: f1b0fea076fb0574d868f6e3d9523f52, type: 2}
-  - {fileID: 0}
+  - {fileID: 2100000, guid: 7a9bced7715b2c047b5413e33bc60d5c, type: 2}
+  - {fileID: 2100000, guid: 7a9bced7715b2c047b5413e33bc60d5c, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
@@ -4824,7 +4824,7 @@ GameObject:
   - component: {fileID: 4363093564197430368}
   - component: {fileID: 6625348177331667087}
   m_Layer: 0
-  m_Name: Fireball Projectile
+  m_Name: Deathball Projectile
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -5263,14 +5263,42 @@ PrefabInstance:
       propertyPath: InitialModule.startSize.scalar
       value: 0.4
       objectReference: {fileID: 0}
-    - target: {fileID: 19998858, guid: 5cd5599e01f32bd418f20a3b9eac1c57, type: 3}
-      propertyPath: m_Materials.Array.data[0]
-      value: 
-      objectReference: {fileID: 2100000, guid: 8c9fad711144d3a4aa22e6140ddfe3c2, type: 2}
-    - target: {fileID: 19998858, guid: 5cd5599e01f32bd418f20a3b9eac1c57, type: 3}
-      propertyPath: m_Materials.Array.data[1]
-      value: 
-      objectReference: {fileID: 2100000, guid: 8c9fad711144d3a4aa22e6140ddfe3c2, type: 2}
+    - target: {fileID: 19801364, guid: 5cd5599e01f32bd418f20a3b9eac1c57, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.r
+      value: 0.60403156
+      objectReference: {fileID: 0}
+    - target: {fileID: 19801364, guid: 5cd5599e01f32bd418f20a3b9eac1c57, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.g
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19801364, guid: 5cd5599e01f32bd418f20a3b9eac1c57, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key1.b
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 19801364, guid: 5cd5599e01f32bd418f20a3b9eac1c57, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key2.r
+      value: 0.6509434
+      objectReference: {fileID: 0}
+    - target: {fileID: 19801364, guid: 5cd5599e01f32bd418f20a3b9eac1c57, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key2.g
+      value: 0.04070248
+      objectReference: {fileID: 0}
+    - target: {fileID: 19801364, guid: 5cd5599e01f32bd418f20a3b9eac1c57, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key2.b
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19801364, guid: 5cd5599e01f32bd418f20a3b9eac1c57, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.key3.r
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 19801364, guid: 5cd5599e01f32bd418f20a3b9eac1c57, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.ctime2
+      value: 44525
+      objectReference: {fileID: 0}
+    - target: {fileID: 19801364, guid: 5cd5599e01f32bd418f20a3b9eac1c57, type: 3}
+      propertyPath: ColorModule.gradient.maxGradient.m_NumColorKeys
+      value: 4
+      objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5cd5599e01f32bd418f20a3b9eac1c57, type: 3}
 --- !u!4 &5926383121551161529 stripped

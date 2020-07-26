@@ -8,6 +8,9 @@ using System.Collections.Generic;
 using GameDevTV.Utils;
 using System;
 using GameDevTV.Inventories;
+using RPG.Abilities;
+using GameDevTV.UI.Inventories;
+using UnityEngine.UI;
 
 namespace RPG.Combat
 {
@@ -26,6 +29,10 @@ namespace RPG.Combat
 
         bool moveToTarget = true;
         [HideInInspector] AbilityConfig abilityConfig = null;
+        [HideInInspector] Dictionary<string, AbilityConfig> abilityConfigs;
+        [HideInInspector] Dictionary<string, float> abilityTimers;
+
+        [HideInInspector] Inventory abilityInventory;
 
         public Transform RightHandTransform { get => rightHandTransform; set => rightHandTransform = value; }
         public Transform LeftHandTransform { get => leftHandTransform; set => leftHandTransform = value; }
@@ -39,6 +46,9 @@ namespace RPG.Combat
             {
                 equipment.equipmentUpdated += UpdateWeapon;
             }
+            abilityInventory = GameObject.FindGameObjectWithTag("ActionSlotInventory").GetComponent<RPG.Abilities.AbilityUI>().GetInventory();
+            abilityConfigs = new Dictionary<string, AbilityConfig>();
+            abilityTimers = new Dictionary<string, float>();
         }
 
         private void Start() 
@@ -48,7 +58,7 @@ namespace RPG.Combat
 
         private void Update()
         {
-            timeSinceLastAttack += Time.deltaTime;
+            UpdateTimers();
 
             if (target == null) return;
             if (target.IsDead())
@@ -70,6 +80,59 @@ namespace RPG.Combat
             {
                 GetComponent<Mover>().Cancel();
                 AttackBehaviour();
+            }
+        }
+
+        public bool CanUseAbility(AbilityConfig abilityConfig)
+        {
+            if (abilityTimers[abilityConfig.GetItemID()] > abilityConfig.cooldown)
+            {
+                return true;
+            }
+
+            return false;
+        }
+
+        private void UpdateTimers()
+        {
+            timeSinceLastAttack += Time.deltaTime;
+
+            if (abilityTimers.Count > 0)
+            {
+                List<string> keys = new List<string>(abilityTimers.Keys);
+                foreach (string key in keys)
+                {
+                    abilityTimers[key] += Time.deltaTime;
+                }
+            }
+
+            if (abilityConfigs.Count > 0)
+            {
+                GameObject[] actionSlots = GameObject.FindGameObjectsWithTag("ActionSlot");
+                foreach (GameObject actionSlot in actionSlots)
+                {
+                    ActionSlotUI actionSlotUI = actionSlot.GetComponent<ActionSlotUI>();
+                    if (actionSlotUI != null)
+                    {
+                        InventoryItem item = actionSlotUI.GetItem();
+                        if (item != null)
+                        {
+                            string key = item.GetItemID();
+                            if (abilityTimers.ContainsKey(key))
+                            {
+                                float abilityTimer = abilityTimers[key];
+                                float abilityCooldown = abilityConfigs[key].cooldown;
+                                float result = 1 - (abilityTimer / abilityConfigs[key].cooldown);
+                                Transform cooldownObject = actionSlot.transform.Find("Cooldown Image");
+                                cooldownObject.gameObject.SetActive(result > 0);
+                                Image image = cooldownObject.GetComponent<Image>();
+                                image.fillAmount = result;
+                                int seconds = (int)(abilityConfigs[key].cooldown - (abilityTimer % 60)) + 1;
+                                cooldownObject.transform.Find("Text").gameObject.GetComponent<Text>().text = String.Format("{0:0}", seconds);
+                            }
+                        }
+                    }
+                }
             }
         }
 
@@ -149,7 +212,9 @@ namespace RPG.Combat
             if(abilityConfig != null)
             {
                 abilityConfig.UseAbility(RightHandTransform, LeftHandTransform, target, gameObject, damage);
-            } else if (currentWeaponConfig.HasProjectile())
+                abilityTimers[abilityConfig.GetItemID()] = 0f;
+            }
+            else if (currentWeaponConfig.HasProjectile())
             {
                 currentWeaponConfig.LaunchProjectile(RightHandTransform, LeftHandTransform, target, gameObject, damage);
             }
@@ -159,6 +224,11 @@ namespace RPG.Combat
             }
 
             abilityConfig = null;
+        }
+
+        public AbilityConfig GetAbilityConfig()
+        {
+            return abilityConfig;
         }
 
         void Shoot()
@@ -212,7 +282,19 @@ namespace RPG.Combat
 
         public void UseAbility(AbilityConfig abilityConfig)
         {
-            this.abilityConfig = abilityConfig;
+            if (abilityConfigs.ContainsKey(abilityConfig.GetItemID()))
+            {
+                AbilityConfig config = abilityConfigs[abilityConfig.GetItemID()];
+                if (CanUseAbility(config))
+                {
+                    this.abilityConfig = config;
+                }
+            } else
+            {
+                abilityConfigs.Add(abilityConfig.GetItemID(), abilityConfig);
+                abilityTimers.Add(abilityConfig.GetItemID(), Mathf.Infinity);
+                this.abilityConfig = abilityConfig;
+            }
         }
 
         public object CaptureState()
