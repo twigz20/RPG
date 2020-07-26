@@ -81,7 +81,7 @@ namespace RPG.Combat
                 GetComponent<Mover>().Cancel();
                 AttackBehaviour();
             }
-        }
+        } 
 
         public bool CanUseAbility(AbilityConfig abilityConfig)
         {
