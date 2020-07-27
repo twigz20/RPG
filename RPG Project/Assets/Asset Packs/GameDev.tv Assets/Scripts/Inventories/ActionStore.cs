@@ -21,6 +21,18 @@ namespace GameDevTV.Inventories
             public int number;
         }
 
+        void Awake()
+        {
+            int x = 1;
+            int y = 3;
+        }
+
+        void Start()
+        {
+            int x = 1;
+            int y = 3;
+        }
+
         // PUBLIC
 
         /// <summary>
