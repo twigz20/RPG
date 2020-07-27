@@ -27,6 +27,8 @@ namespace RPG.Control
 
         bool isDraggingUI = false;
 
+        public bool IsDraggingUI { get => isDraggingUI; set => isDraggingUI = value; }
+
         private void Awake() {
             health = GetComponent<Health>();
         }

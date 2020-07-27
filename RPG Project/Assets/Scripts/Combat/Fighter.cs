@@ -33,8 +33,6 @@ namespace RPG.Combat
         [HideInInspector] Dictionary<string, AbilityConfig> abilityConfigs;
         [HideInInspector] Dictionary<string, float> abilityTimers;
 
-        [HideInInspector] Inventory abilityInventory;
-
         public Transform RightHandTransform { get => rightHandTransform; set => rightHandTransform = value; }
         public Transform LeftHandTransform { get => leftHandTransform; set => leftHandTransform = value; }
         public bool MoveToTarget { get => moveToTarget; set => moveToTarget = value; }
@@ -47,7 +45,6 @@ namespace RPG.Combat
             {
                 equipment.equipmentUpdated += UpdateWeapon;
             }
-            abilityInventory = GameObject.FindGameObjectWithTag("ActionSlotInventory").GetComponent<RPG.Abilities.AbilityUI>().GetInventory();
             abilityConfigs = new Dictionary<string, AbilityConfig>();
             abilityTimers = new Dictionary<string, float>();
         }

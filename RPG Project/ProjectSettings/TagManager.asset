@@ -8,6 +8,7 @@ TagManager:
   - Ability
   - ActionSlotInventory
   - ActionSlot
+  - PlayerFramingCamera
   layers:
   - Default
   - TransparentFX
